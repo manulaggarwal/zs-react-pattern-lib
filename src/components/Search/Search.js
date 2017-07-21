@@ -76,7 +76,7 @@ class Search extends React.Component {
     }
 
     _appendImage(o) {
-        return o? (o.imgURL?`<img class='typeahead-img' src='${o.imgURL}'/>`: '') : '';
+        return o? (o.imgURL?`<img onError={this.src=''} class='typeahead-img' src='${o.imgURL}'/>`: '') : '';
     }
 
     _validateFunctions() {

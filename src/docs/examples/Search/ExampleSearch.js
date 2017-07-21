@@ -5,58 +5,24 @@ class SearchExample extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.clickHandler = this.clickHandler.bind(this);
          this._highlighter = this._highlighter.bind(this);
-        // this.state = {
-        //     source: [],
-        //     highlighter: this._highlighter,
-        //     data: []
-        // }
     }
 
-    componentDidMount() {
-        // fetch("http://localhost:8070/states").then((res)=>{
-        //     if(res.status !== 200) return;
-        //     res.json().then((data)=>{
-        //         if (Array.isArray(data)) {
-        //             let states = [], source = [];
-        //             data.forEach(d=>{
-        //                 states[d.state] = {
-        //                     name: d.state,
-        //                     code: d.code,
-        //                     flag_url: d.state_flag_url,
-        //                     seal_url: d.state_seal_url
-        //                 }
-        //                 source.push(d.state);
-        //             });
-        //             this.setState({
-        //                 source: source,
-        //                 data: states
-        //             })
-        //         }
-        //     });
-        // })
-    }
+    componentDidMount() { }
 
     componentDidUpdate() { }
 
     _highlighter(item) {
-        //console.log("Item :- ", item);
-        //var a = json.find((el)=>el.state===item);
-        //  var obj= json[item]
-        // let src = this.state.data[item];
         return `<div><strong>${item}</strong></div>`
     }
-// <img src='${src.seal_url}' style='width: 20px;float: left;' />
+
     clickHandler(e) {}
 
     render() {
 
         this.options = {
-            source: json,//json.map(o=>{return {name: o.state,imgURL: o.state_flag_url}}),
-            //highlighter: this._highlighter,
-            minLength: 2,
-            test: 'anc '
+            source: json,
+            minLength: 2
         }
 
         return (
