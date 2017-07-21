@@ -1,4 +1,5 @@
 /* Global styles */
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: #666666;
@@ -6,7 +7,8 @@ body {
   margin: 0;
 }
 
-a, a:visited {
+a,
+a:visited {
   color: #666666;
 }
 
@@ -18,15 +20,63 @@ td {
   border-top: solid 1px #d3d3d3;
 }
 
-td, th {
+td,
+th {
   padding: 10px;
 }
 
 table {
-  border-collapse:collapse;
+  border-collapse: collapse;
 }
 
+
 /* Documentation site component styles */
+
+.navbar {
+  border-radius: 0px;
+}
+
+.navbar-header {
+  margin-left: 4% !important;
+}
+
+.navbar-brand {
+  color: #0DD8FF !important;
+}
+
+.navbar-brand :hover {
+  color: #0DD8FF !important;
+}
+
+.brand-description {
+  color: #bfbcbc;
+  padding: 15px 15px;
+  padding-right: 45px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.brand-description :hover {
+  color: #9d9d9d;
+}
+
+.mid-container {
+  margin-top: 75px;
+}
+
+.navigation li :hover,
+.navigation li :focus,
+.navigation li :active {
+  color: #F48024;
+}
+
+.nav-logo {
+  vertical-align: middle;
+  display: inline-block !important;
+  width: 36px;
+  margin-top: -8px;
+}
+
 .example {
   border: solid 1px #d3d3d3;
   padding: 16px;
@@ -35,18 +85,19 @@ table {
 }
 
 .example h4:first-of-type {
-   margin-top: 0;
+  margin-top: 0;
 }
 
 .example p:last-of-type {
-   margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .props tr td:last-of-type {
   text-align: center;
 }
 
-.props th, td {
+.props th,
+td {
   text-align: left;
   padding: 5px;
 }
@@ -56,10 +107,6 @@ table {
   width: 250px;
   list-style-type: none;
   padding: 0;
-}
-
-.componentpage {
-  margin-left: 275px;
 }
 
 .header {

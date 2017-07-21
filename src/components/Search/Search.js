@@ -10,7 +10,7 @@ class Search extends React.Component {
         super(props);
         this._highlighter = this._highlighter.bind(this);
         this.state = {
-            typeahead : undefined,
+            typeahead: undefined,
             options: this.props.options
         }
     }
@@ -20,7 +20,7 @@ class Search extends React.Component {
     }
 
     componentDidUpdate() {
-        this.state.typeahead.initialize(this.state.options);    
+        this.state.typeahead.initialize(this.state.options);
     }
 
     componentWillUnmount() {
@@ -29,7 +29,7 @@ class Search extends React.Component {
     }
 
     render() {
-        const {htmlId,label,error,onChange,placeholder} = this.props;
+        const {htmlId, label, error, onChange, placeholder} = this.props;
 
         return (
             <TextInput
@@ -39,30 +39,29 @@ class Search extends React.Component {
                 placeholder={placeholder}
                 type="search"
                 onChange={onChange}
-                error={error}>
-            </TextInput>
+                error={error}></TextInput>
         );
     }
 
     _postDidMountCheck() {
         let source = this.state.options.source;
         if (Array.isArray(source)) {
-            if (source.every(el=>typeof el === 'object')) {
-                if (source.every(el=>el.hasOwnProperty('name')&&typeof el.name === 'string')) {
+            if (source.every(el => typeof el === 'object')) {
+                if (source.every(el => Object.prototype.hasOwnProperty.call(el,'name') && typeof el.name === 'string')) {
                     this._updateState();
                 } else {
-                   throw new Error(`Expected 'name' property or typeof 'name property as 'string'`);
+                    throw new Error(`Expected 'name' property or typeof 'name' property as 'string'`);
                 }
             } else {
                 this._updateState();
             }
         } else {
             throw new Error(`Expected type of 'Array' but recieved '${typeof source}'`);
-        } 
+        }
     }
 
     _updateState() {
-        this.setState((prevState, props)=>({
+        this.setState((prevState, props) => ({
             typeahead: Typeahead(props.htmlId),
             options: this._validateFunctions()
         }));
@@ -70,13 +69,13 @@ class Search extends React.Component {
 
     _highlighter(item) {
         let source = this.state.options.source;
-        let obj = Array.isArray(source) && typeof source === 'object'? source.find(o=>o.name === item): null;
+        let obj = Array.isArray(source) && typeof source === 'object'? source.find(o => o.name === item): null;
         return `<strong>${item}</strong>
             ${this._appendImage(obj)}`
     }
 
     _appendImage(o) {
-        return o? (o.imgURL?`<img onError={this.src=''} class='typeahead-img' src='${o.imgURL}'/>`: '') : '';
+        return o? (o.imgURL? `<img onError={this.src=''} class='typeahead-img' src='${o.imgURL}'/>`: ''): '';
     }
 
     _validateFunctions() {
@@ -99,10 +98,14 @@ Search.propTypes = {
     /** Options required to initialize typeahead search */
     options: PropTypes.shape({
         source: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-        items: PropTypes.oneOfType([PropTypes.number,PropTypes.oneOf(['all'])]),
+        items: PropTypes.oneOfType([
+            PropTypes.number, PropTypes.oneOf(['all'])
+        ]),
         minLength: PropTypes.number,
-        showHintOnFocus: PropTypes.oneOfType([PropTypes.bool,PropTypes.oneOf(['all'])]),
-        scrollHeight: PropTypes.oneOfType([PropTypes.number,PropTypes.func]),
+        showHintOnFocus: PropTypes.oneOfType([
+            PropTypes.bool, PropTypes.oneOf(['all'])
+        ]),
+        scrollHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
         matcher: PropTypes.func,
         sorter: PropTypes.func,
         updater: PropTypes.func,
@@ -126,17 +129,11 @@ Search.defaultProps = {
 
 export default Search;
 
-
-
-
-
-//  source: PropTypes.oneOfType([PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
-//             if(((typeof propValue[key] !== 'string')) || ((propValue[key].name !== undefined || !(typeof propValue[key].name === 'string')))) {
-//                 return new Error(
-//                     'Invalid prop `' + propFullName + '` supplied to' +
-//                     ' `' + componentName + '`. Validation failed.' + 
-//                     'Expected a string array or an object array with name property of type string.'
-//                 );
-//             }
-//             return ;
-//         })
+//  source: PropTypes.oneOfType([PropTypes.arrayOf(function(propValue, key,
+// componentName, location, propFullName) {             if(((typeof
+// propValue[key] !== 'string')) || ((propValue[key].name !== undefined ||
+// !(typeof propValue[key].name === 'string')))) {                 return new
+// Error(                     'Invalid prop `' + propFullName + '` supplied to'
+// +                     ' `' + componentName + '`. Validation failed.' +
+//       'Expected a string array or an object array with name property of type
+// string.'                 );             }             return ;  })
