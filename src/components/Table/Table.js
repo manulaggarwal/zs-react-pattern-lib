@@ -101,7 +101,7 @@ class Table extends React.Component {
         var searchHeader = this.props.headers.map(function (_ignore, idx) {
             return (
                 <td key={idx}>
-                    <input type="text" data-idx={idx} />
+                    <input className="table-input" type="text" data-idx={idx} />
                 </td>
             );
         });
