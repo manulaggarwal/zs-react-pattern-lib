@@ -52,10 +52,10 @@ export default class Docs extends React.Component {
             </div>
           </div>
           <div className="row mid-container">
-            <div className="col-sm-4">
+            <div className="col-sm-2">
               <Navigation components={componentData.map(component => component.name)}/>
             </div>
-            <div className="col-sm-8">
+            <div className="col-sm-10">
               <ComponentPage component={component}/>
             </div>
           </div>
