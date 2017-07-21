@@ -33,7 +33,7 @@ TextInput.propTypes = {
   label: PropTypes.string.isRequired,
 
   /** Input type */
-  type: PropTypes.oneOf(['text', 'number', 'password']),
+  type: PropTypes.oneOf(['text', 'number', 'password', 'search']),
 
   /** Mark label with asterisk if set to true */
   required: PropTypes.bool,

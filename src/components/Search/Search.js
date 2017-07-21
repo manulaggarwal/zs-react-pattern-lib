@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../TextInput';
 import Typeahead from './Typeahead';
+import './search.css';
 
 class Search extends React.Component {
 
@@ -15,11 +16,7 @@ class Search extends React.Component {
     }
 
     componentDidMount() {
-        let options = this._validateFunctions();
-        this.setState((prevState, props)=>({
-            typeahead: Typeahead(props.htmlId),
-            options: options
-        }));
+        this._postDidMountCheck();
     }
 
     componentDidUpdate() {
@@ -47,6 +44,30 @@ class Search extends React.Component {
         );
     }
 
+    _postDidMountCheck() {
+        let source = this.state.options.source;
+        if (Array.isArray(source)) {
+            if (source.every(el=>typeof el === 'object')) {
+                if (source.every(el=>el.hasOwnProperty('name')&&typeof el.name === 'string')) {
+                    this._updateState();
+                } else {
+                   throw new Error(`Expected 'name' property or typeof 'name property as 'string'`);
+                }
+            } else {
+                this._updateState();
+            }
+        } else {
+            throw new Error(`Expected type of 'Array' but recieved '${typeof source}'`);
+        } 
+    }
+
+    _updateState() {
+        this.setState((prevState, props)=>({
+            typeahead: Typeahead(props.htmlId),
+            options: this._validateFunctions()
+        }));
+    }
+
     _highlighter(item) {
         let source = this.state.options.source;
         let obj = Array.isArray(source) && typeof source === 'object'? source.find(o=>o.name === item): null;
@@ -55,7 +76,7 @@ class Search extends React.Component {
     }
 
     _appendImage(o) {
-        return o.imgURL?`<img style='width: 20px;float: right' src='${o.imgURL}'/>`: '';
+        return o? (o.imgURL?`<img class='typeahead-img' src='${o.imgURL}'/>`: '') : '';
     }
 
     _validateFunctions() {
